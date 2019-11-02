@@ -12,10 +12,11 @@ namespace projeto4BimestreDalilo
 {
     public partial class Form1 : Form
     {
-        int linha = 5;
-        int coluna = 5;
+        int linha = 10;
+        int coluna = 10;
         int bandeiras = 0;
-        int[,] matriz = new int[2, 2];
+        List<int> bomba = new List<int>();
+
         public Form1()
         {
             InitializeComponent();
@@ -24,21 +25,57 @@ namespace projeto4BimestreDalilo
             dataGridView1.Columns.Add("columTres", "");
             dataGridView1.Columns.Add("columQuatro", "");
             dataGridView1.Columns.Add("columCinco", "");
-
-            dataGridView1.Rows.Add("            ", "        ", "       ", "3", "          ");
-            dataGridView1.Rows.Add("5", "6", "7", "8", "9");
-            dataGridView1.Rows.Add("10", "11", "12", "13", "14");
-            dataGridView1.Rows.Add("15", "16", "17", "18", "19");
-            dataGridView1.Rows.Add("20", "21", "22", "23", " ");
+            dataGridView1.Columns.Add("columseis", "");
+            dataGridView1.Columns.Add("columSete", "");
+            dataGridView1.Columns.Add("columOito", "");
+            dataGridView1.Columns.Add("columNove", "");
+            dataGridView1.Columns.Add("columDez", "");
+            inicializaCampoMinado();
         }
-        
+
+        private void inicializaCampoMinado()
+        {
+            bomba.Add(24);
+            bomba.Add(17);
+            bomba.Add(3);
+
+            dataGridView1.Enabled = true;
+            dataGridView1.Rows.Clear();
+            bandeiras = 0;
+            lblBandeiras.Text = bandeiras.ToString();
+            dataGridView1.Rows.Add("            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ");
+            dataGridView1.Rows.Add("            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ");
+            dataGridView1.Rows.Add("            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ");
+            dataGridView1.Rows.Add("            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ");
+            dataGridView1.Rows.Add("            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ");
+            dataGridView1.Rows.Add("            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ");
+            dataGridView1.Rows.Add("            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ");
+            dataGridView1.Rows.Add("            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ");
+            dataGridView1.Rows.Add("            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ");
+            dataGridView1.Rows.Add("            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ");
+            dataGridView1.Rows.Add("            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ", "            ");
+        }
+
+        private int contaBandeira()
+        {
+            int totalBandeira = 0;
+            for (int a=0;a<linha; a++)
+            {
+                for (int b = 0; b < coluna; b++)
+                {
+                    if (dataGridView1.Rows[a].Cells[b].Value.Equals("         Bandeira")) totalBandeira++;
+                }
+            }
+            return totalBandeira;
+        }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (! dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.Equals("              S"))
+            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.Equals("            "))
             {
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "         Bandeira";
                 bandeiras++;
-                lblBandeiras.Text = bandeiras.ToString();
+                lblBandeiras.Text = contaBandeira().ToString();
             }
             
         }
@@ -48,28 +85,12 @@ namespace projeto4BimestreDalilo
         }
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //int contador = 0;
-            //for (int a = 0; a < linha; a++)
-            //{
-            //    for (int b = 0; b < coluna; b++)
-            //    {
-            //        Console.Write(contador+" ");
-            //        contador++;
-            //    }
-            //    Console.WriteLine("");
-            //}
-            List<int> bomba = new List<int>();
-            bomba.Add(24);
-            bomba.Add(17);
-            bomba.Add(3);
+        {     
             int contador = 0;
-            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.Equals("         Bandeira"))
-            {
-                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "              S";
-                bandeiras-=2;
-                lblBandeiras.Text = bandeiras.ToString();
-            }
+
+            dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "              " + calculaQtdBomba(e.RowIndex, e.ColumnIndex).ToString() ;
+            lblBandeiras.Text = contaBandeira().ToString().ToString();
+        
                 
 
             for (int a = 0; a < linha; a++)
@@ -107,6 +128,44 @@ namespace projeto4BimestreDalilo
                     contador++;
                 }
             }//fim dos for 
+        }
+
+        private void btnJogar_Click(object sender, EventArgs e)
+        {
+            inicializaCampoMinado();
+        }
+
+        public int verificaBomba(int posi)//1para bomba && 0para nao bomba
+        {
+            foreach(int bom in bomba)
+            {
+                if (posi == bom) return 1;
+            }
+            return 0;
+        }
+
+        private int calculaQtdBomba(int posiLinha, int posiColuna)
+        {
+            int contador = 0;
+            int qntdBomba = 0;
+            for (int a=0; a < linha; a++)
+            {
+                for(int b = 0; b < coluna; b++)
+                {
+                    if ((a == posiLinha - 1 && b == posiColuna - 1) && verificaBomba(contador) == 1) qntdBomba++;
+                    if ((a == posiLinha - 1 && b == posiColuna) && verificaBomba(contador) == 1) qntdBomba++;
+                    if ((a == posiLinha - 1 && b == posiColuna + 1) && verificaBomba(contador) == 1) qntdBomba++;
+
+                    if ((a == posiLinha && b == posiColuna - 1) && verificaBomba(contador) == 1) qntdBomba++;
+                    if ((a == posiLinha && b == posiColuna + 1) && verificaBomba(contador) == 1) qntdBomba++;
+
+                    if ((a == posiLinha + 1 && b == posiColuna - 1) && verificaBomba(contador) == 1) qntdBomba++;
+                    if ((a == posiLinha + 1 && b == posiColuna) && verificaBomba(contador) == 1) qntdBomba++;
+                    if ((a == posiLinha + 1 && b == posiColuna + 1) && verificaBomba(contador) == 1) qntdBomba++;
+                    contador++;
+                }
+            }
+            return qntdBomba;
         }
     }
 }
