@@ -60,32 +60,24 @@ namespace projeto4BimestreDalilo
                 for (int b = 0; b < coluna; b++)
                 {
                     //verifica se a bomba esta na celula clicada
-                    foreach (int bomb in bomba)
-                    {
-                        if (contador == bomb)
+                    if ( (verificaBomba(contador) == 1)&&(a==e.RowIndex&&b==e.ColumnIndex) )
+                    {//Se estiver o mesmo mostra onde esta todas as bombas e acaba o jogo
+                        foreach (int bombEstorado in bomba)
                         {
-                            if (e.RowIndex == a && e.ColumnIndex == b)
-                            {//Se estiver o mesmo mostra onde esta todas as bombas e acaba o jogo
-                                foreach (int bombEstorado in bomba)
+                            int contEstorado = 0;
+                            for (int aEstorado = 0; aEstorado < linha; aEstorado++)
+                            {
+                                for (int bEstorado = 0; bEstorado < coluna; bEstorado++)
                                 {
-                                    int contEstorado = 0;
-                                    for (int aEstorado = 0; aEstorado < linha; aEstorado++)
+                                    if (contEstorado == bombEstorado)
                                     {
-                                        for (int bEstorado = 0; bEstorado < coluna; bEstorado++)
-                                        {
-                                            if (contEstorado == bombEstorado)
-                                            {
-                                                dataGridView1.Rows[aEstorado].Cells[bEstorado].Value = "              B";
-                                            }
-                                            contEstorado++;
-                                        }
+                                        dataGridView1.Rows[aEstorado].Cells[bEstorado].Value = "              B";
                                     }
+                                    contEstorado++;
                                 }
-                                dataGridView1.Enabled = false;
                             }
-
                         }
-
+                        dataGridView1.Enabled = false;
                     }
                     contador++;
                 }
@@ -133,7 +125,7 @@ namespace projeto4BimestreDalilo
             return totalBandeira;
         }
 
-        public int verificaBomba(int posi)//1para bomba && 0para nao bomba
+        public int verificaBomba(int posi)//1 para bomba && 0 para nao bomba
         {
             foreach(int bom in bomba)
             {
