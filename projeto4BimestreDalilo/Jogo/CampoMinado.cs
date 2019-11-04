@@ -15,6 +15,7 @@ namespace projeto4BimestreDalilo.Jogo
         int linha = 10;
         int coluna = 10;
         int bandeiras = 0;
+        int nivel = 30;//facil=30 medio=40 dificil=50
         List<int> bomba = new List<int>();
 
         public CampoMinado()
@@ -28,11 +29,28 @@ namespace projeto4BimestreDalilo.Jogo
 
         }
 
+        private void randomBombas()
+        {
+            int bombaUnitaria;
+            int total = 0;
+            Random random = new Random();
+            while (total<nivel)
+            {
+                bombaUnitaria = random.Next(0, 100);
+                Console.WriteLine(bombaUnitaria);
+                bomba.Add(bombaUnitaria);
+                total++;
+            }
+            
+        }
+
         private void inicializaCampoMinado()
         {
-            bomba.Add(24);
-            bomba.Add(17);
-            bomba.Add(3);
+            //bomba.Add(24);
+            //bomba.Add(17);
+            //bomba.Add(3);
+            bomba.Clear();
+            randomBombas();
 
             dataGridView1.Enabled = true;
             dataGridView1.Rows.Clear();
@@ -73,7 +91,7 @@ namespace projeto4BimestreDalilo.Jogo
                                 {
                                     if (contEstorado == bombEstorado)
                                     {
-                                        dataGridView1.Rows[aEstorado].Cells[bEstorado].Value = "      B";
+                                        dataGridView1.Rows[aEstorado].Cells[bEstorado].Value = "BOMBA";
                                     }
                                     contEstorado++;
                                 }
