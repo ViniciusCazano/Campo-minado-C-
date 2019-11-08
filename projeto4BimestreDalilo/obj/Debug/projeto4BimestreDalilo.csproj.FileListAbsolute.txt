@@ -9,3 +9,14 @@ C:\Users\Windows\Desktop\44bimestre dalilo\Projeto4BimestreDalilo\projeto4Bimest
 C:\Users\Windows\Desktop\44bimestre dalilo\Projeto4BimestreDalilo\projeto4BimestreDalilo\obj\Debug\projeto4BimestreDalilo.csproj.CoreCompileInputs.cache
 C:\Users\Windows\Desktop\44bimestre dalilo\Projeto4BimestreDalilo\projeto4BimestreDalilo\obj\Debug\projeto4BimestreDalilo.exe
 C:\Users\Windows\Desktop\44bimestre dalilo\Projeto4BimestreDalilo\projeto4BimestreDalilo\obj\Debug\projeto4BimestreDalilo.pdb
+C:\Users\vcazano\Desktop\faculdade\trabalhoDalilo\projeto4BimestreDaliloCampoMinado\projeto4BimestreDalilo\bin\Debug\projeto4BimestreDalilo.exe.config
+C:\Users\vcazano\Desktop\faculdade\trabalhoDalilo\projeto4BimestreDaliloCampoMinado\projeto4BimestreDalilo\bin\Debug\projeto4BimestreDalilo.exe
+C:\Users\vcazano\Desktop\faculdade\trabalhoDalilo\projeto4BimestreDaliloCampoMinado\projeto4BimestreDalilo\bin\Debug\projeto4BimestreDalilo.pdb
+C:\Users\vcazano\Desktop\faculdade\trabalhoDalilo\projeto4BimestreDaliloCampoMinado\projeto4BimestreDalilo\obj\Debug\projeto4BimestreDalilo.csprojAssemblyReference.cache
+C:\Users\vcazano\Desktop\faculdade\trabalhoDalilo\projeto4BimestreDaliloCampoMinado\projeto4BimestreDalilo\obj\Debug\projeto4BimestreDalilo.Form1.resources
+C:\Users\vcazano\Desktop\faculdade\trabalhoDalilo\projeto4BimestreDaliloCampoMinado\projeto4BimestreDalilo\obj\Debug\projeto4BimestreDalilo.Jogo.CampoMinado.resources
+C:\Users\vcazano\Desktop\faculdade\trabalhoDalilo\projeto4BimestreDaliloCampoMinado\projeto4BimestreDalilo\obj\Debug\projeto4BimestreDalilo.Properties.Resources.resources
+C:\Users\vcazano\Desktop\faculdade\trabalhoDalilo\projeto4BimestreDaliloCampoMinado\projeto4BimestreDalilo\obj\Debug\projeto4BimestreDalilo.csproj.GenerateResource.cache
+C:\Users\vcazano\Desktop\faculdade\trabalhoDalilo\projeto4BimestreDaliloCampoMinado\projeto4BimestreDalilo\obj\Debug\projeto4BimestreDalilo.csproj.CoreCompileInputs.cache
+C:\Users\vcazano\Desktop\faculdade\trabalhoDalilo\projeto4BimestreDaliloCampoMinado\projeto4BimestreDalilo\obj\Debug\projeto4BimestreDalilo.exe
+C:\Users\vcazano\Desktop\faculdade\trabalhoDalilo\projeto4BimestreDaliloCampoMinado\projeto4BimestreDalilo\obj\Debug\projeto4BimestreDalilo.pdb

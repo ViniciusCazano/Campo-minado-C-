@@ -44,6 +44,8 @@
             this.lblBandeiras = new System.Windows.Forms.Label();
             this.lblBandeirasText = new System.Windows.Forms.Label();
             this.btnJogar = new System.Windows.Forms.Button();
+            this.lblScore = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -198,12 +200,36 @@
             this.btnJogar.UseVisualStyleBackColor = true;
             this.btnJogar.Click += new System.EventHandler(this.btnJogar_Click);
             // 
+            // lblScore
+            // 
+            this.lblScore.AutoSize = true;
+            this.lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScore.ForeColor = System.Drawing.Color.White;
+            this.lblScore.Location = new System.Drawing.Point(593, 117);
+            this.lblScore.Name = "lblScore";
+            this.lblScore.Size = new System.Drawing.Size(50, 24);
+            this.lblScore.TabIndex = 8;
+            this.lblScore.Text = "scor";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(516, 117);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 24);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Score:";
+            // 
             // CampoMinado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(687, 374);
+            this.Controls.Add(this.lblScore);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnJogar);
             this.Controls.Add(this.lblBandeiras);
             this.Controls.Add(this.lblBandeirasText);
@@ -233,5 +259,7 @@
         private System.Windows.Forms.Label lblBandeiras;
         private System.Windows.Forms.Label lblBandeirasText;
         private System.Windows.Forms.Button btnJogar;
+        private System.Windows.Forms.Label lblScore;
+        private System.Windows.Forms.Label label2;
     }
 }

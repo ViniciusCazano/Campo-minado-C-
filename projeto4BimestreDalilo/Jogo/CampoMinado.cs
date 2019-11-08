@@ -14,8 +14,9 @@ namespace projeto4BimestreDalilo.Jogo
     {
         int linha = 10;
         int coluna = 10;
-        int bandeiras = 0;
+        int bandeiras;
         int nivel = 30;//facil=30 medio=40 dificil=50
+        List<int> aleatorio = new List<int>();
         List<int> bomba = new List<int>();
 
         public CampoMinado()
@@ -37,11 +38,23 @@ namespace projeto4BimestreDalilo.Jogo
             while (total<nivel)
             {
                 bombaUnitaria = random.Next(0, 100);
-                Console.WriteLine(bombaUnitaria);
                 bomba.Add(bombaUnitaria);
                 total++;
             }
             
+        }
+        private void randomNull()
+        {
+            int bombaUnitaria;
+            int total = 0;
+            Random random = new Random();
+            while (total < 5)
+            {
+                int ale = random.Next(0, 100);
+                aleatorio.Add(ale);
+                total++;
+            }
+
         }
 
         private void inicializaCampoMinado()
@@ -52,9 +65,13 @@ namespace projeto4BimestreDalilo.Jogo
             bomba.Clear();
             randomBombas();
 
+            aleatorio.Clear();
+            randomNull();
+
             dataGridView1.Enabled = true;
             dataGridView1.Rows.Clear();
-            bandeiras = 0;
+            bandeiras = 20;
+            lblScore.Text = "0";
             lblBandeiras.Text = bandeiras.ToString();
             dataGridView1.Rows.Add(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ");
             dataGridView1.Rows.Add(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ");
@@ -71,7 +88,6 @@ namespace projeto4BimestreDalilo.Jogo
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int contador = 0;
-
             dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "      " + calculaQtdBomba(e.RowIndex, e.ColumnIndex).ToString();
             lblBandeiras.Text = contaBandeira().ToString().ToString();
 
@@ -79,8 +95,13 @@ namespace projeto4BimestreDalilo.Jogo
             {
                 for (int b = 0; b < coluna; b++)
                 {
+                    if ((a == e.RowIndex && b == e.ColumnIndex) && (verificaNull(contador) == 1))
+                    {
+                        explodeEX1(a, b);
+                        break;
+                    }
                     //verifica se a bomba esta na celula clicada
-                    if ((verificaBomba(contador) == 1) && (a == e.RowIndex && b == e.ColumnIndex))
+                    else if ((verificaBomba(contador) == 1) && (a == e.RowIndex && b == e.ColumnIndex))
                     {//Se estiver o mesmo mostra onde esta todas as bombas e acaba o jogo
                         foreach (int bombEstorado in bomba)
                         {
@@ -91,14 +112,20 @@ namespace projeto4BimestreDalilo.Jogo
                                 {
                                     if (contEstorado == bombEstorado)
                                     {
-                                        dataGridView1.Rows[aEstorado].Cells[bEstorado].Value = "BOMBA";
+                                        if(dataGridView1.Rows[aEstorado].Cells[bEstorado].Value.Equals("Bandeira"))
+                                            dataGridView1.Rows[aEstorado].Cells[bEstorado].Value = "Falha";
+                                        
+                                        else if (!dataGridView1.Rows[aEstorado].Cells[bEstorado].Value.Equals("NULL"))
+                                            dataGridView1.Rows[aEstorado].Cells[bEstorado].Value = "BOMBA";
                                     }
                                     contEstorado++;
                                 }
                             }
                         }
                         dataGridView1.Enabled = false;
+                        break;
                     }
+
                     contador++;
                 }
             }//fim dos for 
@@ -107,12 +134,12 @@ namespace projeto4BimestreDalilo.Jogo
 
         private int contaBandeira()
         {
-            int totalBandeira = 0;
+            int totalBandeira = 20;
             for (int a = 0; a < linha; a++)
             {
                 for (int b = 0; b < coluna; b++)
                 {
-                    if (dataGridView1.Rows[a].Cells[b].Value.Equals("Bandeira")) totalBandeira++;
+                    if (dataGridView1.Rows[a].Cells[b].Value.Equals("Bandeira")) totalBandeira--;
                 }
             }
             bandeiras = totalBandeira;
@@ -124,6 +151,15 @@ namespace projeto4BimestreDalilo.Jogo
             foreach (int bom in bomba)
             {
                 if (posi == bom) return 1;
+            }
+            return 0;
+        }
+
+        public int verificaNull(int posi)//1 para bomba && 0 para nao bomba
+        {
+            foreach (int al in aleatorio)
+            {
+                if (posi == al) return 1;
             }
             return 0;
         }
@@ -159,10 +195,10 @@ namespace projeto4BimestreDalilo.Jogo
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if ((dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.Equals(" ")) && bandeiras < 3)
+            if ((dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.Equals(" ")) && bandeiras > 0)
             {
                 dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "Bandeira";
-                bandeiras++;
+                bandeiras--;
                 lblBandeiras.Text = contaBandeira().ToString();
             }
             testaVitoria();
@@ -185,6 +221,30 @@ namespace projeto4BimestreDalilo.Jogo
             MessageBox.Show("Você ganhou");
             dataGridView1.Enabled = false;
             return 1;
+        }
+
+        private void explodeEX1(int linha, int coluna)
+        {
+            int contador = 0;
+            Random random = new Random();
+            dataGridView1.Rows[linha].Cells[coluna].Value = "NULL";
+            int final = random.Next(0, 10);
+            while (true)
+            {
+                if (contador == final) break;
+                try
+                {
+                    int linhaRandom = random.Next(-2, 2);
+                    int colunaRandom = random.Next(-2, 2);
+                    dataGridView1.Rows[linha + linhaRandom].Cells[coluna + colunaRandom].Value = "NULL";
+                    
+                }
+                catch
+                {
+                    
+                }
+                contador++;
+            }
         }
     }
 }
