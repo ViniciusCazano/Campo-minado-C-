@@ -43,6 +43,7 @@ namespace projeto4BimestreDalilo.Jogo
             }
             
         }
+
         private void randomNull()
         {
             int bombaUnitaria;
@@ -95,9 +96,10 @@ namespace projeto4BimestreDalilo.Jogo
             {
                 for (int b = 0; b < coluna; b++)
                 {
+                    //verifica se o campo vai explodir
                     if ((a == e.RowIndex && b == e.ColumnIndex) && (verificaNull(contador) == 1))
                     {
-                        explodeEX1(a, b);
+                        abreCamposNUll(a, b);
                         break;
                     }
                     //verifica se a bomba esta na celula clicada
@@ -223,7 +225,7 @@ namespace projeto4BimestreDalilo.Jogo
             return 1;
         }
 
-        private void explodeEX1(int linha, int coluna)
+        private void abreCamposNUll(int linha, int coluna)
         {
             int contador = 0;
             Random random = new Random();
@@ -236,8 +238,7 @@ namespace projeto4BimestreDalilo.Jogo
                 {
                     int linhaRandom = random.Next(-2, 2);
                     int colunaRandom = random.Next(-2, 2);
-                    dataGridView1.Rows[linha + linhaRandom].Cells[coluna + colunaRandom].Value = "NULL";
-                    
+                    dataGridView1.Rows[linha + linhaRandom].Cells[coluna + colunaRandom].Value = "      " + calculaQtdBomba(linha + linhaRandom, coluna + colunaRandom).ToString();
                 }
                 catch
                 {
